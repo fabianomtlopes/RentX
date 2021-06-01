@@ -45,7 +45,7 @@ describe('Authenticate User', () => {
   });
 
   it('should not be able to authenticate with an incorrect password.', async () => {
-    expect(async () => {
+    await expect(async () => {
       const user: ICreateUserDTO = {
         name: 'Fabiano Lopes',
         email: 'fabiano@gmail.com',

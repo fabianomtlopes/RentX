@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/fabianomtlopes/.nvm/versions/node/v14.16.1/bin/node /usr/local/Cellar/yarn/1.22.10/libexec/bin/yarn.js add ts-sconfig-paths -D
+  /Users/fabianomtlopes/.nvm/versions/node/v14.16.1/bin/node /usr/local/Cellar/yarn/1.22.10/libexec/bin/yarn.js add @types/date-fns-tz -D
 
 PATH: 
   /Users/fabianomtlopes/.nvm/versions/node/v14.16.1/bin:/Users/fabianomtlopes/.nvm/versions/node/v14.16.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/fabianomtlopes/.nvm/versions/node/v14.16.1/bin:/Volumes/HD2/Android/Sdk/emulator:/Volumes/HD2/Android/Sdk/tools:/Volumes/HD2/Android/Sdk/tools/bin:/Volumes/HD2/Android/Sdk/platform-tools:/Volumes/HD2/Android/Sdk/emulator:/Volumes/HD2/Android/Sdk/tools:/Volumes/HD2/Android/Sdk/tools/bin:/Volumes/HD2/Android/Sdk/platform-tools
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/ts-sconfig-paths: Not found
+  Error: https://registry.yarnpkg.com/@types%2fdate-fns-tz: Not found
       at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:66988:18)
       at Request.self.callback (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:140749:22)
       at Request.emit (events.js:315:20)
@@ -33,13 +33,15 @@ npm manifest:
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-      "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-      "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
+      "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
+      "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
       "test": "jest"
     },
     "dependencies": {
       "bcryptjs": "^2.4.3",
       "csv-parse": "^4.15.4",
+      "date-fns": "^2.21.3",
+      "date-fns-tz": "^1.1.4",
       "express": "^4.17.1",
       "express-async-errors": "^3.1.1",
       "jsonwebtoken": "^8.5.1",
@@ -53,6 +55,7 @@ npm manifest:
     },
     "devDependencies": {
       "@types/bcryptjs": "^2.4.2",
+      "@types/date-fns": "^2.6.0",
       "@types/express": "^4.17.11",
       "@types/jest": "^26.0.23",
       "@types/jsonwebtoken": "^8.5.1",
@@ -72,6 +75,7 @@ npm manifest:
       "prettier": "^2.2.1",
       "ts-jest": "^26.5.6",
       "ts-node-dev": "^1.1.6",
+      "tsconfig-paths": "^3.9.0",
       "typescript": "^4.2.4"
     }
   }
@@ -692,6 +696,13 @@ Lockfile:
     integrity sha512-ePPA/JuI+X0vb+gSWlPKOY0NdNAie/rPUqX2GUPpbZwiKTkSPhjXWuee47E4MtE54QVzGCQMQkAL6JhV2E1+cQ==
     dependencies:
       "@types/node" "*"
+  
+  "@types/date-fns@^2.6.0":
+    version "2.6.0"
+    resolved "https://registry.yarnpkg.com/@types/date-fns/-/date-fns-2.6.0.tgz#b062ca46562002909be0c63a6467ed173136acc1"
+    integrity sha1-sGLKRlYgApCb4MY6ZGftFzE2rME=
+    dependencies:
+      date-fns "*"
   
   "@types/express-serve-static-core@^4.17.18":
     version "4.17.19"
@@ -1742,6 +1753,16 @@ Lockfile:
       abab "^2.0.3"
       whatwg-mimetype "^2.3.0"
       whatwg-url "^8.0.0"
+  
+  date-fns-tz@^1.1.4:
+    version "1.1.4"
+    resolved "https://registry.yarnpkg.com/date-fns-tz/-/date-fns-tz-1.1.4.tgz#38282c2bfab08946a4e9bb89d733451e5525048b"
+    integrity sha512-lQ+FF7xUxxRuRqIY7H/lagnT3PhhSnnvtGHzjE5WZKwRyLU7glJfLys05SZ7zHlEr6RXWiqkmgWq4nCkcElR+g==
+  
+  date-fns@*, date-fns@^2.21.3:
+    version "2.21.3"
+    resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.21.3.tgz#8f5f6889d7a96bbcc1f0ea50239b397a83357f9b"
+    integrity sha512-HeYdzCaFflc1i4tGbj7JKMjM4cKGYoyxwcIIkHzNgCkX8xXDNJDZXgDDVchIWpN4eQc3lH37WarduXFZJOtxfw==
   
   dateformat@~1.0.4-1.2.3:
     version "1.0.12"
