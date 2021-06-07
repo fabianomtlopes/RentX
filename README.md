@@ -1,6 +1,8 @@
 1- Testes Unitários
 - Funções
 - Não inclui rotas
+- Para fins de teste - trocar **"database": "rentx"**   para rentx_test - base de dados original, apenas rentx
+no arquivo ormconfig.json
 
 
 2- Testes de Integração
@@ -91,7 +93,18 @@ DDD - Domain Driven Design
 # Listagem de Aluguéis para usuário
 
 **RF**
-- [] Deve ser possível realizar a busca de todos os aluguéis para o usuário
+- [x] Deve ser possível realizar a busca de todos os aluguéis para o usuário
 
 **RN**
-- [] O usuário deve estar logado na aplicação
+- [x] O usuário deve estar logado na aplicação
+
+# Recuperar senha
+
+**RF**
+- [x] Deve ser possível o usuário recuperar a senha informando o e-mail
+- [x] O usuário deve receber um e-mail com o passo a passo para a recuperação de senha
+- [x] O usuário deve conseguir inserir uma nova senha
+
+**RN**
+- [x] O usuário precisa informar uma nova senha
+- [x] O link enviado para a recuperação de senha deve expirar em 3 horas

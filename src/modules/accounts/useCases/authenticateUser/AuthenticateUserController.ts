@@ -11,7 +11,7 @@ class AuthenticateUserController {
 
     const token = await authenticateUserUseCase.execute({ email, password });
 
-    delete token.user.password;
+    delete token.user;
 
     return response.json(token);
   }

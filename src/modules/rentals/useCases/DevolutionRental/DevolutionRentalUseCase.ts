@@ -45,7 +45,7 @@ class DevolutionRentalUseCase {
     let total = 0;
 
     const delay = this.dateProvider.compareInDays(rental.expected_return_date, dateNow);
-    console.log('Aki ******** => ', delay);
+    // console.log('Aki ******** => ', delay);
     if (delay > 0) {
       const calculate_fine = delay * car.fine_amount;
       total = calculate_fine;

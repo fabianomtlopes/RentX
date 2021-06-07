@@ -1,19 +1,29 @@
 import { ICreateUserDTO } from '@modules/accounts/dtos/ICreateUserDTO';
 import { UsersRepositoryFake } from '@modules/accounts/repositories/fakes/UserRepositoryFake';
+import { UsersTokensRepositoryFake } from '@modules/accounts/repositories/fakes/UsersTokensRepositoryFake';
 
+import { DateFnsProvider } from '@shared/container/provider/DateProvider/implementations/DateFnsProvider';
 import { AppError } from '@shared/errors/AppError';
 
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase';
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 
 let usersRepositoryFake: UsersRepositoryFake;
+let userTokenRepositoryFake: UsersTokensRepositoryFake;
 let authenticateUserUseCase: AuthenticateUserUseCase;
 let createUserUseCase: CreateUserUseCase;
+let dateProvider: DateFnsProvider;
 
 describe('Authenticate User', () => {
   beforeEach(() => {
     usersRepositoryFake = new UsersRepositoryFake();
-    authenticateUserUseCase = new AuthenticateUserUseCase(usersRepositoryFake);
+    userTokenRepositoryFake = new UsersTokensRepositoryFake();
+    dateProvider = new DateFnsProvider();
+    authenticateUserUseCase = new AuthenticateUserUseCase(
+      usersRepositoryFake,
+      userTokenRepositoryFake,
+      dateProvider,
+    );
     createUserUseCase = new CreateUserUseCase(usersRepositoryFake);
   });
 
@@ -36,29 +46,29 @@ describe('Authenticate User', () => {
   });
 
   it('should not be able to authenticate a none existent user.', async () => {
-    expect(async () => {
-      await authenticateUserUseCase.execute({
+    await expect(
+      authenticateUserUseCase.execute({
         email: 'false@email.com',
         password: '1234',
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      }),
+    ).rejects.toEqual(new AppError('E-mail or password incorrect!'));
   });
 
   it('should not be able to authenticate with an incorrect password.', async () => {
-    await expect(async () => {
-      const user: ICreateUserDTO = {
-        name: 'Fabiano Lopes',
-        email: 'fabiano@gmail.com',
-        password: '1234',
-        driver_license: '1234cnh',
-      };
+    const user: ICreateUserDTO = {
+      name: 'Fabiano Lopes',
+      email: 'fabiano@gmail.com',
+      password: '1234',
+      driver_license: '1234cnh',
+    };
 
-      await createUserUseCase.execute(user);
+    await createUserUseCase.execute(user);
 
-      await authenticateUserUseCase.execute({
+    await expect(
+      authenticateUserUseCase.execute({
         email: user.email,
         password: 'incorrect password',
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      }),
+    ).rejects.toEqual(new AppError('E-mail or password incorrect!'));
   });
 });
