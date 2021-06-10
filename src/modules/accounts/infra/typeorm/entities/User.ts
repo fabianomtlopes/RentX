@@ -1,3 +1,4 @@
+import { Expose } from 'class-transformer'; // para criar link na imagem do avatar
 import {
   PrimaryGeneratedColumn,
   Entity,
@@ -35,6 +36,18 @@ class User {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Expose({ name: 'avatar_url' })
+  avatar_url(): string {
+    switch (process.env.DISK) {
+      case 'local':
+        return `${process.env.APP_API_URL}/avatar/${this.avatar}`;
+      case 'S3':
+        return `${process.env.AWS_BUCKET_URL}/avatar/${this.avatar}`;
+      default:
+        return null;
+    }
+  }
 
   constructor() {
     if (!this.id) {

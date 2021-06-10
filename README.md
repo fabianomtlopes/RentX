@@ -1,18 +1,27 @@
-1- Testes Unitários
+## 1- Testes Unitários
 - Funções
 - Não inclui rotas
 - Para fins de teste - trocar **"database": "rentx"**   para rentx_test - base de dados original, apenas rentx
 no arquivo ormconfig.json
 
 
-2- Testes de Integração
+## 2- Testes de Integração
 -> routes -> controllers -> useCases -> repository
 <- repository <- usesCases <- controllers <- routes
 
-Metodologia
+## Metodologia
 TDD - Test Driven Development
 
 DDD - Domain Driven Design
+
+## Config
+Arquivo .env => ajustar para configuração externa
+**AWS** => S3 para salvar imagens
+**AWS** => SES - Simple Email Service
+
+Para serviços de e-mail
+**SendGrid** => Serviço de e-mail, plano free com limitações (entre outras, opcionais)
+
 
 # Cadastro de Carro
 

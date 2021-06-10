@@ -3,8 +3,9 @@
      "target": "es5",
      "module": "commonjs",
      "allowJs": true,
-     "rootDir": "./src",
+     "rootDir": "./",
      "baseUrl": "./src",
+     "outDir": "./dist",
      "paths": {
        "@modules/*": ["modules/*"],
        "@middlewares/*": ["middlewares/*"],
